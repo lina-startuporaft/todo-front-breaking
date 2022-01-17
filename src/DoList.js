@@ -1,4 +1,3 @@
-import { useState } from 'react/cjs/react.development'
 import Do from './components/Do.js'
 
 function DoList({tasks, delDo, checkStateChekbox}) {

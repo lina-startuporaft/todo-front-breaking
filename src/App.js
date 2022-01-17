@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import ReactDom from 'react-dom';
 import Head from './components/Head.js'
 import DoList from './DoList.js';
 import './style/App.css'
@@ -62,6 +61,10 @@ function App() {
       setTasks(thisTaskDone);
       setSecondTasks(anotherTaskDone);
       break;
+    case 'Done':
+      const newDone = tasks.filter(item => item.checked == false);
+      console.log(newDone);
+      break;
   }};
 
   function seeUndone() {
@@ -99,7 +102,7 @@ function App() {
   }, [see]);
 
   return (
-          <div>
+          <div className='back'>
             <Head addDo={addDo} sortDoUp={sortDoUp} sortDoDown={sortDoDown} seeDone={seeDone} seeUndone={seeUndone} seeAll={seeAll}/>
             <div className='content'>
               <DoList tasks={tasks} delDo={delDo} checkStateChekbox={checkStateChekbox}/>

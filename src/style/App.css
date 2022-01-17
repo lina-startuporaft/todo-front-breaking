@@ -24,6 +24,7 @@
     margin-left: 2.8571429%;
     width: 11.4285714%;
     height: 5vh;
+    min-height: 50px;
 }
 
 .col.span1 {
@@ -62,7 +63,7 @@ img {
 }
 
 input {
-    font-size: 1.75vh;
+    font-size: 150%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     background-color: white;
@@ -88,11 +89,13 @@ input {
     display: flex;
     flex-direction: row;
     height: 8vh;
+    min-height: 40px;
 }
 
 .coldo {
     margin: auto 0 auto 2%;
-    font-size: 2vh;
+    font-size: 150%;
+    min-height: 35px;
 }
 
 .coldo.col1{
@@ -101,16 +104,28 @@ input {
 }
 
 .coldo.col2{
-    width: 66%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    width: 62%;
+    padding-top: 0.3%
 }
 
 .coldo.col3{
-    width: 11%;
+    width: 15%;
+    padding-top: 0.5% 
 }
 
 .coldo.col4{
     width: 6%;
     background-color: #e03838;
-}   
+}
 
-
+.back{
+    background-image: url(../image/background.jpg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
