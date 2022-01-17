@@ -67,7 +67,7 @@ function App() {
   function seeUndone() {
     switch (see) {
       case 'All':
-        setSee('Done');
+        setSee('Undone');
         const thisTask = tasks.filter(item => item.checked == false);
         setTasks(thisTask);
         const anotherTask = tasks.filter(item => item.checked == true);
@@ -93,6 +93,10 @@ function App() {
         setTasks(tasks.concat(secondTasks));
         break;}
   }
+
+  useEffect(() => {
+    if (see == 'All') {sortDoDown()};
+  }, [see]);
 
   return (
           <div>
