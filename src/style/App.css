@@ -6,11 +6,12 @@
     width: 42.349%;
     max-width: 980px;
     margin: 0 auto;
+    min-width: 700px;
 }
   
 .head {
     padding-right: 2.8571429%;
-    height: 12vw;
+    height: 12vh;
 }
 
 .row {
@@ -22,7 +23,7 @@
     float: left;
     margin-left: 2.8571429%;
     width: 11.4285714%;
-    height: 3vw;
+    height: 5vh;
 }
 
 .col.span1 {
@@ -73,6 +74,7 @@ input {
     flex-direction: column;
     margin: 3vw auto;
     width: 50%;
+    min-width: 700px;
 
 }
 
@@ -85,16 +87,17 @@ input {
     padding-right: 2%;
     display: flex;
     flex-direction: row;
+    height: 8vh;
 }
 
 .coldo {
     margin: auto 0 auto 2%;
-    font-size: 1.2vw;
+    font-size: 2vh;
 }
 
 .coldo.col1{
     width: 7%;
-    height: 2vw;
+    height: 3vh;
 }
 
 .coldo.col2{

@@ -3,7 +3,7 @@ import '../style/App.css'
 import ToDo from '../image/to-do.jpg'
 import Sort from '../image/sort.jpg'
 
-function Head({addDo}) {
+function Head({addDo, sortDoUp, sortDoDown}) {
     const [count, setCount] = useState('');
     const [id, setId] = useState(1);
 
@@ -37,8 +37,8 @@ function Head({addDo}) {
                         <input className="col" type="button" value="Undone"/>
                         <div className="col"></div>
                         <img src={Sort} alt="Sort" className="col span2"/>
-                        <input className="col span5" type="button" value="new"/>
-                        <input className="col span5" type="button" value="old"/>
+                        <input className="col span5" type="button" value="new" onClick={sortDoUp}/>
+                        <input className="col span5" type="button" value="old" onClick={sortDoDown}/>
                     </div>
                 </div>
             </div>
