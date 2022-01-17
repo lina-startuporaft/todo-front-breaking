@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Welcome from './/components/head.js';
+import App from './App.js';
 
-
-   
-ReactDOM.render(<Welcome/>, document.getElementById('mybody'));
-
+ReactDOM.render(
+  <App/>,    
+  document.getElementById('root')
+);

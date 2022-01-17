@@ -2,8 +2,6 @@
     box-sizing: border-box;
   }
 
-
-
 .head-container {  
     width: 42.349%;
     max-width: 980px;
@@ -75,6 +73,7 @@ input {
     flex-direction: column;
     margin: 3vw auto;
     width: 50%;
+
 }
 
 .do {
@@ -109,7 +108,6 @@ input {
 .coldo.col4{
     width: 6%;
     background-color: #e03838;
-}
-
+}   
 
 
