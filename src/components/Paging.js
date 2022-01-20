@@ -5,7 +5,7 @@ import PagingNumbers from './PagingNumber.js'
 function Paging({tasks, checkPage, selectPage}) {
     return(
         <div className={styles.pagingconteiner}>
-            <input className={styles.pagingcolStart} type="button" value={'<'}></input>
+            <input className={styles.pagingcolStart} type="button" value={'<'} onClick={checkPage}></input>
                 {tasks.map((task, index) => {
                     if ((index % 5) == 0) {
                 return <PagingNumbers 
@@ -13,7 +13,7 @@ function Paging({tasks, checkPage, selectPage}) {
                         checkPage={checkPage}
                         selectPage={selectPage}/>
                 }})}
-            <input className={styles.pagingcolEnd} type="button" value={'>'}></input>
+            <input className={styles.pagingcolEnd} type="button" value={'>'} onClick={checkPage}></input>
         </div>
     )
 }

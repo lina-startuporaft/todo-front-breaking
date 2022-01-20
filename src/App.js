@@ -154,7 +154,13 @@ function App() {
   const [selectPage, setSelectPage] = useState(1);
 
   function checkPage(e) {
-    setSelectPage(e.currentTarget.value);
+    if (e.currentTarget.value == "<") {
+      setSelectPage(1);
+    } else if (e.currentTarget.value == ">") { 
+      setSelectPage(Math.ceil(tasks.length / 5))
+    } else {
+      setSelectPage(e.currentTarget.value);
+    }
   }
 
   return (
