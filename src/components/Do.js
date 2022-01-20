@@ -1,23 +1,54 @@
-import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
-import "../style/App.css";
+import React, { useEffect, useState } from "react";
+import styles from "../style/App.module.css"
 
 function Do({task, delDo, checkStateChekbox}) {
 
-    function createDate() {
-    const dateNow = new Date();
-    const year = dateNow.getFullYear();
-    const month = dateNow.getMonth() + 1;
-    const day = dateNow.getDate();
-    return (day + '/' + month + '/' + year);
+    const [checkFocusTask, setCheckFocusTask] = useState(true)
+    
+    const refInput = React.createRef();
+
+    function focusTask(e) {
+        if (e.button == 0){
+            setCheckFocusTask(false);
+        }
     }
 
+    function unFocusTask() {
+        setCheckFocusTask(true);
+    }
+
+    function chekEnterOrEsc(e) {
+        if (e.key == 'Escape') {
+            unFocusTask();
+        } else if (e.key == 'Enter') {
+            task.title = refInput.current.value;
+            unFocusTask();
+        }
+    }
+
+    useEffect(() => {if (checkFocusTask == false) {refInput.current.focus()}},[checkFocusTask])
+
     return(
-        <div className="do">
-            <input type="checkbox" className="coldo col1" onChange={checkStateChekbox} checked={task.checked} id={task.id}/>
-            <input className="coldo col2" value={task.title}></input>
-            <p className="coldo col3">{createDate()}</p>
-            <input className="coldo col4" type="button" value='del' onClick={delDo} id={task.id}/>
+        <div className={styles.do}>
+            <input type="checkbox" className={styles.coldoCol1} onChange={checkStateChekbox} checked={task.checked} id={task.id}/>
+            {
+            checkFocusTask?
+                <p 
+                    className={styles.coldoCol2} 
+                    onMouseDown={focusTask}>
+                        {task.title}
+                </p>:
+                <input 
+                    ref={refInput} 
+                    onBlur={unFocusTask} 
+                    onKeyUp={chekEnterOrEsc} 
+                    className={styles.coldoCol2} 
+                    defaultValue={task.title} 
+                    id={task.id}>
+                </input>
+            }
+            <p className={styles.coldoCol3}>12/01/2022</p>
+            <input className={styles.coldoCol4} type="button" value='del' onClick={delDo} id={task.id}/>
         </div>
     )
 }

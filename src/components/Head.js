@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import '../style/App.css'
+import styles from '../style/App.module.css'
 import ToDo from '../image/to-do.jpg'
 import Sort from '../image/sort.jpg'
 
-function Head({addDo, sortDoUp, sortDoDown, seeDone, seeUndone, seeAll}) {
+function Head({addDo, sortDoUp, sortDoDown, seeDone, seeUndone, seeAll, activeSee, activeSort}) {
     const [count, setCount] = useState('');
     const [id, setId] = useState(1);
 
@@ -21,24 +21,24 @@ function Head({addDo, sortDoUp, sortDoDown, seeDone, seeUndone, seeAll}) {
     }
 
     return(
-            <div className="head-container">
-                <div className="head">
-                    <div className="row">
-                        <div className="col span3"></div>
-                        <img src={ToDo} alt="To Do" className="col span4"/>
-                        <div className="col span3"></div>
+            <div className={styles.head_container}>
+                <div className={styles.head}>
+                    <div className={styles.row}>
+                        <div className={styles.colSpan3}></div>
+                        <img src={ToDo} alt="To Do" className={styles.colSpan4}/>
+                        <div className={styles.colSpan3}></div>
                     </div>
-                    <div className="row">
-                        <input className="col span1" type="text" onChange={editChange} onKeyUp={chekEnter}/>
+                    <div className={styles.row}>
+                        <input className={styles.colSpan1} type="text" onChange={editChange} onKeyUp={chekEnter}/>
                     </div>
-                    <div className="row">
-                        <input  className="col" type="button" value="All" onClick={seeAll}/>
-                        <input  className="col" type="button" value="Done" onClick={seeDone}/>
-                        <input className="col" type="button" value="Undone" onClick={seeUndone}/>
-                        <div className="col"></div>
-                        <img src={Sort} alt="Sort" className="col span2"/>
-                        <input className="col span5" type="button" value="new" onClick={sortDoDown}/>
-                        <input className="col span5" type="button" value="old" onClick={sortDoUp}/>
+                    <div className={styles.row}>
+                        <input  className={styles.col} type="button" value="All" style={activeSee[0]} onClick={seeAll}/>
+                        <input  className={styles.col} type="button" value="Done" style={activeSee[1]} onClick={seeDone}/>
+                        <input className={styles.col} type="button" value="Undone" style={activeSee[2]} onClick={seeUndone}/>
+                        <div className={styles.col}></div>
+                        <img src={Sort} alt="Sort" className={styles.colSpan2}/>
+                        <input className={styles.colSpan5} type="button" value="new" style={activeSort[0]} onClick={sortDoDown}/>
+                        <input className={styles.colSpan5} type="button" value="old" style={activeSort[1]} onClick={sortDoUp}/>
                     </div>
                 </div>
             </div>
