@@ -30,7 +30,12 @@ function Do({task, delDo, checkStateChekbox}) {
 
     return(
         <div className={styles.do}>
-            <input type="checkbox" className={styles.coldoCol1} onChange={checkStateChekbox} checked={task.checked} id={task.id}/>
+            <input 
+                type="checkbox" 
+                className={styles.coldoCol1} 
+                onChange={checkStateChekbox} 
+                checked={task.checked} 
+                id={task.id}/>
             {
             checkFocusTask?
                 <p 
@@ -44,11 +49,18 @@ function Do({task, delDo, checkStateChekbox}) {
                     onKeyUp={chekEnterOrEsc} 
                     className={styles.coldoCol2} 
                     defaultValue={task.title} 
-                    id={task.id}>
+                    id={task.id}
+                    maxLength="70">
+                    
                 </input>
             }
             <p className={styles.coldoCol3}>{task.date}</p>
-            <input className={styles.coldoCol4} type="button" value='del' onClick={delDo} id={task.id}/>
+            <input 
+                className={styles.coldoCol4} 
+                type="button" 
+                value='del' 
+                onClick={delDo}
+                id={task.id}/>
         </div>
     )
 }

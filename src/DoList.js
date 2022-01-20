@@ -8,7 +8,7 @@ function DoList({tasks, delDo, checkStateChekbox, selectPage}) {
                 return (
                 <Do
                     task={task} 
-                    delDo={delDo} 
+                    delDo={delDo}
                     checkStateChekbox={checkStateChekbox} 
                     key={task.id}/>
                 )

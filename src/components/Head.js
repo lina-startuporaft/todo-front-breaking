@@ -29,7 +29,7 @@ function Head({addDo, sortDoUp, sortDoDown, seeDone, seeUndone, seeAll, activeSe
                         <div className={styles.colSpan3}></div>
                     </div>
                     <div className={styles.row}>
-                        <input className={styles.colSpan1} type="text" onChange={editChange} onKeyUp={chekEnter}/>
+                        <input className={styles.colSpan1} maxLength="70" type="text" onChange={editChange} onKeyUp={chekEnter}/>
                     </div>
                     <div className={styles.row}>
                         <input  className={styles.col} type="button" value="All" style={activeSee[0]} onClick={seeAll}/>

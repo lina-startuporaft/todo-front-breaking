@@ -8,7 +8,19 @@ import Paging from './components/Paging.js'
 function App() {
   
   const [tasks, setTasks] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [orderBy, setOrderBy] = useState('asc');
+  const [filterBy, setFilterBy] = useState('all');
+  const [page, setPage] = useState(0);
+  
+  //Sort
+  const defoultActiveSort = [
+    {backgroundColor: 'rgb(64, 199, 82)'},
+    {backgroundColor: 'white'},
+  ]
+  const [activeSort, setActiveSort] = useState(defoultActiveSort);
 
+  const [activeSortForAll, setActiveSortForAll] = useState(true);
   const [secondTasks, setSecondTasks] = useState(0);
 
   //by re-render
@@ -31,24 +43,31 @@ function App() {
   function delDo(e) {
     let taskNew = tasks.filter((item) => item.id != e.currentTarget.id);
     setTasks(taskNew);
-    if ((selectPage > ((tasks.length-5) / 5)) && ((tasks.length - 1) % 5 == 0) && (selectPage != 1)) {
+  //Del last task on last page
+    if ((selectPage > ((tasks.length - 5) / 5)) && ((tasks.length - 1) % 5 == 0) && (selectPage != 1)) {
       setSelectPage(selectPage - 1);
     }
   }
   
-  //Sort
-  const defoultActiveSort = [
-    {backgroundColor: 'rgb(64, 199, 82)'},
-    {backgroundColor: 'white'},
-  ]
-  const [activeSort, setActiveSort] = useState(defoultActiveSort);
-  const [activeSortForAll, setActiveSortForAll] = useState(true);
+
+
+  function sortUp(arrForSort) {
+    arrForSort.sort((a, b) => {
+      return a.id - b.id;
+    })
+    return arrForSort;
+  }
+
+  function sortDown(arrForSort) {
+    arrForSort.sort((a, b) => {
+      return b.id - a.id;
+    })
+    return arrForSort;
+  } 
 
   function sortDoUp() {
     if (activeSortForAll) {
-    setTasks(tasks.sort((a, b) => {
-      return a.id - b.id;
-    }));
+    setTasks(sortUp(tasks));
     setState(!state);
     let newActiveSort = activeSort;
     setActiveSort(newActiveSort.reverse());
@@ -58,17 +77,13 @@ function App() {
 
   function sortDoDown() {
     if (!activeSortForAll) {
-    setTasks(tasks.sort((a, b) => {
-      return b.id - a.id
-    }));
+    setTasks(sortDown(tasks));
     setState(!state);
     let newActiveSort = activeSort;
     setActiveSort(newActiveSort.reverse());
     setActiveSortForAll(!activeSortForAll);
     }
   }
-
-
 
   //check Checkbox
   function checkStateChekbox(e) {
@@ -87,9 +102,9 @@ function App() {
     setSelectPage(1);
     switch (see) {
       case 'All':
-        const thisTask = tasks.filter(item => item.checked == true);
+        const thisTask = tasks.filter(item => item.checked === true);
         setTasks(thisTask);
-        const anotherTask = tasks.filter(item => item.checked == false);
+        const anotherTask = tasks.filter(item => item.checked === false);
         setSecondTasks(anotherTask);
         break;
       case 'Undone':
@@ -141,13 +156,9 @@ function App() {
   useEffect(() => {
     if (see == 'All') {
       if (activeSortForAll) {
-        setTasks(tasks.sort((a, b) => {
-          return b.id - a.id
-        }));
+        setTasks(sortDown(tasks));
       } else {
-        setTasks(tasks.sort((a, b) => {
-          return a.id - b.id 
-        }));
+        setTasks(sortDown(tasks));
       }
       let newActive = colorActiveDefoult;
       newActive.splice(0, 1, {backgroundColor: 'rgb(64, 199, 82)'}); 
@@ -183,7 +194,7 @@ function App() {
               addDo={addDo} 
               sortDoUp={sortDoUp} 
               sortDoDown={sortDoDown} 
-              seeDone={seeDone} 
+              seeDone={seeDone}
               seeUndone={seeUndone} 
               seeAll={seeAll} 
               activeSee={activeSee} 
@@ -199,7 +210,7 @@ function App() {
                     tasks={tasks} 
                     checkPage={checkPage}
                     selectPage={selectPage}/>
-                  :null}
+                  : null}
             </div>
           </div>
         )

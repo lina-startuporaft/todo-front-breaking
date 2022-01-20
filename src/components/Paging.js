@@ -3,6 +3,9 @@ import styles from '../style/App.module.css'
 import PagingNumbers from './PagingNumber.js'
 
 function Paging({tasks, checkPage, selectPage}) {
+
+
+    
     return(
         <div className={styles.pagingconteiner}>
             <input className={styles.pagingcolStart} type="button" value={'<'} onClick={checkPage}></input>
