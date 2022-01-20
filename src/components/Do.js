@@ -47,7 +47,7 @@ function Do({task, delDo, checkStateChekbox}) {
                     id={task.id}>
                 </input>
             }
-            <p className={styles.coldoCol3}>12/01/2022</p>
+            <p className={styles.coldoCol3}>{task.date}</p>
             <input className={styles.coldoCol4} type="button" value='del' onClick={delDo} id={task.id}/>
         </div>
     )

@@ -13,15 +13,27 @@ function App() {
 
   //by re-render
   const [state, setState] = useState(false);
+  
+  //Create date
+  function createDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return day + '/' + month + '/' + year;
+  }
 
   //Del and add
   function addDo({count, id}){
-     setTasks([{title: count, id: id, checked: false}].concat(tasks));
+     setTasks([{title: count, id: id, checked: false, date: createDate()}].concat(tasks));
   }
 
   function delDo(e) {
     let taskNew = tasks.filter((item) => item.id != e.currentTarget.id);
     setTasks(taskNew);
+    if ((selectPage > ((tasks.length-5) / 5)) && ((tasks.length - 1) % 5 == 0) && (selectPage != 1)) {
+      setSelectPage(selectPage - 1);
+    }
   }
   
   //Sort
@@ -72,6 +84,7 @@ function App() {
 
   function seeDone() {
     setSee('Done');
+    setSelectPage(1);
     switch (see) {
       case 'All':
         const thisTask = tasks.filter(item => item.checked == true);
@@ -88,6 +101,7 @@ function App() {
   }};
 
   function seeUndone() {
+    setSelectPage(1);
     setSee('Undone');
     switch (see) {
       case 'All':
@@ -105,6 +119,7 @@ function App() {
   }}
 
   function seeAll() {
+    setSelectPage(1);
     setSee('All');
     switch (see) {
       case 'Done':
@@ -137,7 +152,6 @@ function App() {
       let newActive = colorActiveDefoult;
       newActive.splice(0, 1, {backgroundColor: 'rgb(64, 199, 82)'}); 
       setActiveSee(newActive);
-      console.log(activeSee);
     } else if (see == 'Done') {
       let newActive = colorActiveDefoult;
       newActive.splice(1, 1, {backgroundColor: 'rgb(64, 199, 82)'}); 

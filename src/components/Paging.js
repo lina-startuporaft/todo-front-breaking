@@ -21,7 +21,7 @@ function Paging({tasks, checkPage, selectPage}) {
                 return <PagingNumbers 
                         index={index / 5 + 1}
                         checkPage={checkPage}
-                        selectPage={selectPage}/>        
+                        selectPage={selectPage}/>     
                     }
                 })}
             <input className={styles.pagingcolEnd} type="button" value={'>'} onClick={checkPage}></input>
