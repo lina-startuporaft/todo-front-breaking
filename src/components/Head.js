@@ -3,7 +3,7 @@ import styles from '../style/App.module.css'
 import ToDo from '../image/to-do.jpg'
 import Sort from '../image/sort.jpg'
 
-function Head({addDo, sortDoUp, sortDoDown, seeDone, seeUndone, seeAll, activeSee, activeSort}) {
+function Head({addDo, sort, filtering}) {
     const [count, setCount] = useState('');
     const [id, setId] = useState(1);
 
@@ -32,13 +32,13 @@ function Head({addDo, sortDoUp, sortDoDown, seeDone, seeUndone, seeAll, activeSe
                         <input className={styles.colSpan1} maxLength="70" type="text" onChange={editChange} onKeyUp={chekEnter}/>
                     </div>
                     <div className={styles.row}>
-                        <input  className={styles.col} type="button" value="All" style={activeSee[0]} onClick={seeAll}/>
-                        <input  className={styles.col} type="button" value="Done" style={activeSee[1]} onClick={seeDone}/>
-                        <input className={styles.col} type="button" value="Undone" style={activeSee[2]} onClick={seeUndone}/>
+                        <input  className={styles.col} type="button" value="All" onClick={filtering}/>
+                        <input  className={styles.col} type="button" value="Done" onClick={filtering}/>
+                        <input className={styles.col} type="button" value="Undone" onClick={filtering}/>
                         <div className={styles.col}></div>
                         <img src={Sort} alt="Sort" className={styles.colSpan2}/>
-                        <input className={styles.colSpan5} type="button" value="new" style={activeSort[0]} onClick={sortDoDown}/>
-                        <input className={styles.colSpan5} type="button" value="old" style={activeSort[1]} onClick={sortDoUp}/>
+                        <input className={styles.colSpan5} type="button" value="new" onClick={sort}/>
+                        <input className={styles.colSpan5} type="button" value="old" onClick={sort}/>
                     </div>
                 </div>
             </div>

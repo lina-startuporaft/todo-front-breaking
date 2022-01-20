@@ -1,18 +1,17 @@
+import { useEffect } from 'react'
 import Do from './components/Do.js'
 
-function DoList({tasks, delDo, checkStateChekbox, selectPage}) {
+function DoList({tasks, delDo}) {
            return (
         <div>
-            {tasks.map((task, index) => {
-                if ((index >= (selectPage * 5 - 5))&&(index <= (selectPage * 5 - 1))) {
+            {tasks.map((task) => {
                 return (
                 <Do
                     task={task} 
                     delDo={delDo}
-                    checkStateChekbox={checkStateChekbox} 
                     key={task.id}/>
                 )
-            }})}
+            })}
         </div>
     )
 }

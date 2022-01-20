@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 
-function Do({task, delDo, checkStateChekbox}) {
+function Do({task, delDo, checkboxChange}) {
 
     const [checkFocusTask, setCheckFocusTask] = useState(true)
     
@@ -33,8 +33,7 @@ function Do({task, delDo, checkStateChekbox}) {
             <input 
                 type="checkbox" 
                 className={styles.coldoCol1} 
-                onChange={checkStateChekbox} 
-                checked={task.checked} 
+                onChange={checkboxChange}
                 id={task.id}/>
             {
             checkFocusTask?
