@@ -18,20 +18,22 @@ function App() {
     let newArr = [];
     switch (orderBy) {
       case ("new"):
-        
+        newArr = sortNew(tasks);
+        setFilteredTasks(newArr);
         break;
       case ("old"):
-
+        newArr = sortOld(tasks);
+        setFilteredTasks(newArr);
         break;
     }
-  }, [orderBy]);
+  }, [tasks, orderBy]);
 
   const addDo = ({count, id}) => {
-    setTasks([{title: count, id: id, checked: false, date: '22/22/22'}].concat(tasks));
+    setTasks([...tasks, {title: count, id: id, checked: false, date: '22/22/22'}]);
   }
 
-  const delDo = () => {
-
+  const delDo = (e) => {
+    // setTasks(map.tasks((task) => task))
   }
 
   const sort = (e) => {
@@ -55,7 +57,7 @@ function App() {
               />
             <div className={styles.content}>
               <DoList 
-                tasks={filteredTasks}
+                tasks={filteredTasks.reverse()}
                 delDo={delDo}
                 // selectPage={selectPage}
                 />
