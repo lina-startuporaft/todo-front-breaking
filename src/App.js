@@ -8,7 +8,7 @@ import { getByRole } from '@testing-library/react'
 
 function App() {
   
-  const [tasks, setTasks] = useState([]);
+  let [tasks, setTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [orderBy, setOrderBy] = useState('new');
   const [filterBy, setFilterBy] = useState();
@@ -18,18 +18,16 @@ function App() {
     let newArr = [];
     switch (orderBy) {
       case ("new"):
-        newArr = sortNew(tasks);
-        setFilteredTasks(newArr);
+        setTasks(sortNew(tasks));
         break;
       case ("old"):
-        newArr = sortOld(tasks);
-        setFilteredTasks(newArr);
+        setFilteredTasks(sortOld(tasks));
         break;
     }
   }, [tasks, orderBy]);
 
   const addDo = ({count, id}) => {
-    setTasks([...tasks, {title: count, id: id, checked: false, date: '22/22/22'}]);
+    tasks = ([...tasks, {title: count, id: id, checked: false, date: '22/22/22'}]);
   }
 
   const delDo = (e) => {
