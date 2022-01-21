@@ -3,7 +3,7 @@ import Head from './components/Head.js'
 import DoList from './DoList.js'
 import styles from './style/App.module.css'
 import Paging from './components/Paging.js'
-
+const axios = require('axios').default;
 
 function App() {
   
@@ -13,6 +13,19 @@ function App() {
   const [filterBy, setFilterBy] = useState('all');
   const [page, setPage] = useState(0);
   
+  axios({
+    method: 'get',
+    url: 'https://todo-api-learning.herokuapp.com/v1/tasks/2?order=asc&pp=5&page=2',
+    responseType: 'stream'
+  })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+
   //Sort
   const defoultActiveSort = [
     {backgroundColor: 'rgb(64, 199, 82)'},
