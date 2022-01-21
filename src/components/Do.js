@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 
-function Do({task, delDo, checkboxChange}) {
+function Do({task, delDo}) {
 
+    const [checkboxState, setCheckboxState] = useState(task.checked);
     const [checkFocusTask, setCheckFocusTask] = useState(true)
-    
     const refInput = React.createRef();
 
     function focusTask(e) {
@@ -26,6 +26,10 @@ function Do({task, delDo, checkboxChange}) {
         }
     }
 
+    function checkboxChange(e) {
+        setCheckboxState(e.currentTarget.checked);
+    } 
+
     useEffect(() => {if (checkFocusTask == false) {refInput.current.focus()}},[checkFocusTask])
 
     return(
@@ -34,7 +38,8 @@ function Do({task, delDo, checkboxChange}) {
                 type="checkbox" 
                 className={styles.coldoCol1} 
                 onChange={checkboxChange}
-                id={task.id}/>
+                id={task.id}
+                checked={checkboxState}/>
             {
             checkFocusTask?
                 <p 

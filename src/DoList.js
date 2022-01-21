@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Do from './components/Do.js'
 
 function DoList({tasks, delDo}) {
-           return (
+    return (
         <div>
             {tasks.map((task) => {
                 return (
