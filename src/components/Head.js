@@ -45,4 +45,4 @@ function Head({addDo, sort}) {
     )
 }
 
-export default Head 
+export default Head
