@@ -49,6 +49,9 @@ function App() {
       const resultReq = await axios.delete('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id);
       console.log(resultReq.data);
       upgradeTasks();
+      if ((((numberTasks - 1) / 5) == (page - 1)) && (page != 1)) {
+        setPage(page - 1);
+      }
     } catch(err) {
       alert(err);
     }
