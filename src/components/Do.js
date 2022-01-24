@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 
-function Do({task, delDo}) {
+function Do({task, delDo, checkboxChange, editTask}) {
 
-    const [checkboxState, setCheckboxState] = useState(task.checked);
     const [checkFocusTask, setCheckFocusTask] = useState(true)
     const refInput = React.createRef();
 
@@ -21,14 +20,10 @@ function Do({task, delDo}) {
         if (e.key == 'Escape') {
             unFocusTask();
         } else if (e.key == 'Enter') {
-            task.title = refInput.current.value;
+            editTask(e);
             unFocusTask();
         }
     }
-
-    function checkboxChange(e) {
-        setCheckboxState(e.currentTarget.checked);
-    } 
 
     useEffect(() => {if (checkFocusTask == false) {refInput.current.focus()}},[checkFocusTask])
 
@@ -39,7 +34,7 @@ function Do({task, delDo}) {
                 className={styles.coldoCol1} 
                 onChange={checkboxChange}
                 id={task.id}
-                checked={checkboxState}/>
+                checked={task.checked}/>
             {
             checkFocusTask?
                 <p 
@@ -58,7 +53,7 @@ function Do({task, delDo}) {
                     
                 </input>
             }
-            <p className={styles.coldoCol3}>{task.date}</p>
+            <p className={styles.coldoCol3}>{task.date.slice(0, 10)}</p>
             <input 
                 className={styles.coldoCol4} 
                 type="button" 

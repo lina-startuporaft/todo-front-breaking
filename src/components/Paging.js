@@ -2,12 +2,13 @@ import React from "react"
 import styles from '../style/App.module.css'
 import PagingNumbers from './PagingNumber.js'
 
-function Paging({checkPage}) {
+function Paging({checkPage, page, lengthPage}) {
     const arrPages = [];
-    for(let i = 1; i <= 10; i++) {
-        arrPages.push(i);
+    for(let i = 1; i <= lengthPage + 4; i++) {
+        if (i % 5 === 0) {
+            arrPages.push(i / 5);
+        }
     }
-    console.log(arrPages);
     return(
         <div className={styles.pagingconteiner}>
             <input className={styles.pagingcolStart} type="button" value={'<'} onClick={checkPage}></input>
@@ -15,7 +16,9 @@ function Paging({checkPage}) {
                     return (
                         <PagingNumbers 
                     checkPage={checkPage}
-                    index={item}/>
+                    index={item}
+                    key={item}
+                    page={page}/>
                     )
                 })}
             <input className={styles.pagingcolEnd} type="button" value={'>'} onClick={checkPage}></input>
