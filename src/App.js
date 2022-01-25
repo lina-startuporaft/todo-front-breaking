@@ -14,12 +14,13 @@ function App() {
   const [filterBy, setFilterBy] = useState('all');
   const [page, setPage] = useState(1);
 
-  useEffect(async () => {
+  useEffect(() => {
     upgradeTasks(orderBy, filterBy, page);
   }, [orderBy, filterBy, page]);
   
   const upgradeTasks = async (orderBy, filterBy, page) => {
-    const resultReq  = await axios.get('https://todo-api-learning.herokuapp.com/v1/tasks/2', {
+    try {
+      const resultReq  = await axios.get('https://todo-api-learning.herokuapp.com/v1/tasks/2', {
       params: {
         filterBy: (filterBy === 'all') ? null : filterBy,
         order: orderBy,
@@ -32,6 +33,9 @@ function App() {
     });
     setNumberTasks(resultReq.data.count);
     setTasks(newArr);
+    } catch (err) {
+      alert(err);
+    }
   }
 
   const addDo = async ({count}) => {
