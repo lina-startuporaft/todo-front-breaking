@@ -3,19 +3,18 @@ import styles from '../style/App.module.css'
 import ToDo from '../image/to-do.jpg'
 import Sort from '../image/sort.jpg'
 import 'antd/dist/antd.css'
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 
 function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     const [count, setCount] = useState('');
 
     function editChange(e) {
-        setCount(e.currentTarget.value);
+        setCount(e.target.value);
     }
 
     function chekEnter(e) {
         if (e.key == 'Enter') {
             addDo({count});
-            e.currentTarget.value = '';
             setCount('');
         }
     }
@@ -53,7 +52,7 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
                         <div className={styles.colSpan3}></div>
                     </div>
                     <div className={styles.row}>
-                        <input className={styles.colSpan1} maxLength="70" type="text" onChange={editChange} onKeyUp={chekEnter}/>
+                        <Input className={styles.colSpan1} maxLength="70" type="text" value={count} onChange={editChange} onKeyUp={chekEnter} placeholder="I will..."/>
                     </div>
                     <div className={styles.row}>
                         <Button  className={styles.col} style={activeFilter[0]} type="button" value="all" onClick={currentFilter}>All</Button>
