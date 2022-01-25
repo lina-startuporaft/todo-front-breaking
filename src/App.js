@@ -113,24 +113,23 @@ function App() {
               filterBy={filterBy}
               orderBy={orderBy}
               />
-            <div className={styles.content}>
-              <DoList 
-                tasks={tasks}
-                delDo={delDo}
-                checkboxChangeEdit={checkboxChangeEdit}
-                editTask={editTask}/>
-                {(numberPage > 1) ?
-                  <Pagination 
-                  defaultCurrent={1}
-                  current={page}
-                  total={numberPage*10}
-                  onChange={checkPage}
-                  showSizeChanger={false}
-                  className={styles.pagingconteiner}/>
-                  : null
-                }
-                  
-            </div>
+              <div className={styles.content}>
+                <DoList 
+                  tasks={tasks}
+                  delDo={delDo}
+                  checkboxChangeEdit={checkboxChangeEdit}
+                  editTask={editTask}/>
+                  {(numberPage > 1) ?
+                    <Pagination 
+                    defaultCurrent={1}
+                    current={page}
+                    total={numberPage*10}
+                    onChange={checkPage}
+                    showSizeChanger={false}
+                    className={styles.pagingconteiner}/>
+                    : null
+                  }      
+              </div>
           </div>
         )
 }

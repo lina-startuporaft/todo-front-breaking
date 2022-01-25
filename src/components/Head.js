@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import styles from '../style/App.module.css'
 import ToDo from '../image/to-do.jpg'
-import Sort from '../image/sort.jpg'
 import 'antd/dist/antd.css'
-import { Button, Input } from 'antd';
+import { Button, Input, Row, Col } from 'antd';
 
 function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     const [count, setCount] = useState('');
@@ -46,23 +45,45 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     return(
             <div className={styles.head_container}>
                 <div className={styles.head}>
-                    <div className={styles.row}>
-                        <div className={styles.colSpan3}></div>
-                        <img src={ToDo} alt="To Do" className={styles.colSpan4}/>
-                        <div className={styles.colSpan3}></div>
-                    </div>
-                    <div className={styles.row}>
-                        <Input className={styles.colSpan1} maxLength="70" type="text" value={count} onChange={editChange} onKeyUp={chekEnter} placeholder="I will..."/>
-                    </div>
-                    <div className={styles.row}>
-                        <Button  className={styles.col} style={activeFilter[0]} type="button" value="all" onClick={currentFilter}>All</Button>
-                        <Button  className={styles.col} style={activeFilter[1]} type="button" value="done" onClick={currentFilter}>Done</Button>
-                        <Button className={styles.col} style={activeFilter[2]} type="button" value="undone" onClick={currentFilter}>Undone</Button>
-                        <div className={styles.col}></div>
-                        <img src={Sort} alt="Sort" className={styles.colSpan2}/>
-                        <Button className={styles.colSpan5}  style={activeSort[0]} type="button" value="desc" onClick={sort}>Desc</Button>
-                        <Button className={styles.colSpan5}  style={activeSort[1]} type="button" value="asc" onClick={sort}>Asc</Button>
-                    </div>
+                    <Row>
+                        <Col span={8}>
+                            <div className={styles.colcol}/>
+                        </Col>
+                        <Col span={8}>
+                            <img className={styles.colcol} src={ToDo} alt="To Do"/>
+                        </Col>
+                        <Col span={8}>
+                            <div className={styles.colcol}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Input className={styles.colcol} maxLength="70" type="text" value={count} onChange={editChange} onKeyUp={chekEnter} placeholder="I will..."/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={4}>
+                            <Button className={styles.colcol} style={activeFilter[0]} type="button" value="all" onClick={currentFilter}>All</Button>
+                        </Col>
+                        <Col span={4}>
+                            <Button className={styles.colcol} style={activeFilter[1]} type="button" value="done" onClick={currentFilter}>Done</Button>
+                        </Col>
+                        <Col span={4}>
+                            <Button className={styles.colcol} style={activeFilter[2]} type="button" value="undone" onClick={currentFilter}>Undone</Button>
+                        </Col>
+                        <Col span={5}>
+                            <div className={styles.colcol}></div>
+                        </Col>
+                        <Col span={1}>
+                            <div className={styles.colcol}>Sort</div>
+                        </Col>
+                        <Col span={3}>
+                            <Button  className={styles.colcol} style={activeSort[0]} type="button" value="desc" onClick={sort}>Desc</Button>
+                        </Col>
+                        <Col span={3}>
+                            <Button  className={styles.colcol} style={activeSort[1]} type="button" value="asc" onClick={sort}>Asc</Button>
+                        </Col>
+                    </Row>
                 </div>
             </div>
     )

@@ -6,19 +6,13 @@
     width: 42.349%;
     margin: 0 auto;
     max-width: 980px;
-    max-height: 400px;
+    max-height: 200px;
     min-width: 700px;
-    min-height: 100px;
+    min-height: 180px;
 }
   
 .head {
-    padding-right: 2.8571429%;
     height: 12vh;
-}
-
-.row {
-    clear: both;
-    padding-top: 1vw;
 }
 
 .col {
@@ -78,6 +72,8 @@
 img {
     border-radius: 5px;
     border: solid 1px black;
+    width: 100%;
+    height: auto;
 }
 
 input {
@@ -154,7 +150,6 @@ p{
 
 .coldoCol4{
     width: 8%;
-    background-color: #e03838;
     margin: auto 0 auto 2%;
     font-size: 80%;
     min-height: 10px;
@@ -177,4 +172,13 @@ p{
     flex: 70px;
     display: flex;
     justify-content: center;
+}
+
+.colcol{
+   width: 90%;
+   margin: 10px 0;
+}
+
+.rowrow{
+    height: 100px;
 }
