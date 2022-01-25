@@ -175,10 +175,14 @@ p{
 }
 
 .colcol{
-   width: 90%;
-   margin: 10px 0;
+    width: 90%;
+    margin: 10px auto;
 }
 
 .rowrow{
     height: 100px;
+}
+
+.do{
+    width: 100%;
 }
