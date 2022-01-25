@@ -5,6 +5,7 @@ import styles from './style/App.module.css'
 import Paging from './components/Paging.js'
 import { Pagination } from 'antd';
 import 'antd/dist/antd.css'
+import { message } from 'antd';
 const axios = require('axios');
 
 
@@ -36,7 +37,7 @@ function App() {
     setNumberPage(Math.ceil(resultReq.data.count / 5));
     setTasks(newArr);
     } catch (err) {
-      alert(err);
+      message.error(`${err.name}:${err.message}`);
     }
   }
 
@@ -50,7 +51,7 @@ function App() {
       });
       upgradeTasks(orderBy, filterBy, page);
     } catch (err) {
-      alert(err);
+      message.error(`${err.name}:${err.message}`);
     }
   }
 
@@ -62,7 +63,7 @@ function App() {
         setPage(numberPage - 1);
       }
     } catch(err) {
-      alert(err);
+      message.error(`${err.name}:${err.message}`);
     }
   }
 
@@ -74,7 +75,7 @@ function App() {
       });
       upgradeTasks(orderBy, filterBy, page);
     } catch(err) {
-      alert(err);
+      message.error(`${err.name}:${err.message}`);
     }
   }
 
@@ -86,7 +87,7 @@ function App() {
     });
     upgradeTasks(orderBy, filterBy, page);
     } catch(err) {
-      alert(err);
+      message.error(`${err.name}:${err.message}`);
     }
   }
 
