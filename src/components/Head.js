@@ -5,7 +5,6 @@ import Sort from '../image/sort.jpg'
 
 function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     const [count, setCount] = useState('');
-    const [id, setId] = useState(1);
 
     function editChange(e) {
         setCount(e.currentTarget.value);
@@ -13,33 +12,33 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
 
     function chekEnter(e) {
         if (e.key == 'Enter') {
-            addDo({count, id});
+            addDo({count});
             e.currentTarget.value = '';
             setCount('');
-            setId(id + 1);
         }
     }
 
     let activeFilter = [];
+    const activeColor = {backgroundColor: '#6ccf71'};
     switch (filterBy) {
         case ('all'):
-            activeFilter[0] = {backgroundColor: '#6ccf71'};
+            activeFilter[0] = activeColor;
             break;
         case ('done'):
-            activeFilter[1] = {backgroundColor: '#6ccf71'};
+            activeFilter[1] = activeColor;
             break;
         case ('undone'):
-            activeFilter[2] = {backgroundColor: '#6ccf71'};
+            activeFilter[2] = activeColor;
             break;
     }
 
     let activeSort = [];
     switch (orderBy) {
         case ('desc'):
-            activeSort[0] = {backgroundColor: '#6ccf71'};
+            activeSort[0] = activeColor;
             break;
         case ('asc'):
-            activeSort[1] = {backgroundColor: '#6ccf71'};
+            activeSort[1] = activeColor;
             break;
     }
     

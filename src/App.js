@@ -9,19 +9,24 @@ const axios = require('axios');
 function App() {
   
   const [tasks, setTasks] = useState([]);
-  const [filteredTasks, setFilteredTasks] = useState([]);
   const [numberTasks, setNumberTasks] = useState();
   const [orderBy, setOrderBy] = useState('desc');
   const [filterBy, setFilterBy] = useState('all');
   const [page, setPage] = useState(1);
 
   useEffect(async () => {
-    upgradeTasks();
+    upgradeTasks(orderBy, filterBy, page);
   }, [orderBy, filterBy, page]);
   
-  const upgradeTasks = async () => {
-    let reqFilter = (filterBy === 'all') ? '' : ('filterBy=' + filterBy + '&');
-    const resultReq  = await axios.get('https://todo-api-learning.herokuapp.com/v1/tasks/2?' + reqFilter + 'order=' + orderBy + '&pp=5&page=' + page);
+  const upgradeTasks = async (orderBy, filterBy, page) => {
+    const resultReq  = await axios.get('https://todo-api-learning.herokuapp.com/v1/tasks/2', {
+      params: {
+        filterBy: (filterBy === 'all') ? null : filterBy,
+        order: orderBy,
+        pp: "5",
+        page: page,
+      }
+    });
     let newArr = resultReq.data.tasks.map((task) => {
       return {title: task.name, id: task.uuid , checked: task.done, date: task.createdAt}
     });
@@ -29,7 +34,7 @@ function App() {
     setTasks(newArr);
   }
 
-  const addDo = async ({count, id}) => {
+  const addDo = async ({count}) => {
     try {
       const resultReq = await axios.post('https://todo-api-learning.herokuapp.com/v1/task/2', {
         "name": count,
@@ -37,8 +42,7 @@ function App() {
         "createdAt": new Date(),
         "updatedAt": new Date()
       });
-      console.log(resultReq.data);
-      upgradeTasks();
+      upgradeTasks(orderBy, filterBy, page);
     } catch (err) {
       alert(err);
     }
@@ -47,8 +51,7 @@ function App() {
   const delDo = async (e) => {
     try {
       const resultReq = await axios.delete('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id);
-      console.log(resultReq.data);
-      upgradeTasks();
+      upgradeTasks(orderBy, filterBy, page);
       if ((((numberTasks - 1) / 5) == (page - 1)) && (page != 1)) {
         setPage(page - 1);
       }
@@ -57,45 +60,28 @@ function App() {
     }
   }
 
-  const checkboxChange = async (e) => {
-    // const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id, {
-    //   "done": e.currentTarget.checked,
-    //   "updatedAt": new Date(),
-    // });
-    // console.log(resultReq.data);
-    // upgradeTasks();
-    axios({
-      method: 'patch',
-      url: 'https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id,
-      data: {
+  const checkboxChangeEdit = async (e, name) => {
+    try {
+      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id, {
+        "name": name,
         "done": e.currentTarget.checked,
-        "updatedAt": new Date()
-      }
-    })
-    .then((res) => {
-      upgradeTasks();
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      });
+      upgradeTasks(orderBy, filterBy, page);
+    } catch(err) {
+      alert(err);
+    }
   }
 
-  const editTask = (e) => {
-    axios({
-      method: 'patch',
-      url: 'https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id,
-      data: {
-        "name": e.currentTarget.value,
-        "updatedAt": new Date()
-      }
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  const editTask = async (e) => {
+    try {
+      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id, {
+      "name": e.currentTarget.value,
+      "updatedAt": new Date(),
+    });
+    upgradeTasks(orderBy, filterBy, page);
+    } catch(err) {
+      alert(err);
+    }
   }
 
   const sort = (e) => {
@@ -133,7 +119,7 @@ function App() {
               <DoList 
                 tasks={tasks}
                 delDo={delDo}
-                checkboxChange={checkboxChange}
+                checkboxChangeEdit={checkboxChangeEdit}
                 editTask={editTask}/>
                 {(numberTasks > 5) ?
                   <Paging 

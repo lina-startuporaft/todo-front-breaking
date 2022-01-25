@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 
-function Do({task, delDo, checkboxChange, editTask}) {
+function Do({task, delDo, checkboxChangeEdit, editTask}) {
 
     const [checkFocusTask, setCheckFocusTask] = useState(true)
     const refInput = React.createRef();
@@ -23,6 +23,10 @@ function Do({task, delDo, checkboxChange, editTask}) {
             editTask(e);
             unFocusTask();
         }
+    }
+
+    const checkboxChange = (e) => {
+        checkboxChangeEdit(e, task.title)
     }
 
     useEffect(() => {if (checkFocusTask == false) {refInput.current.focus()}},[checkFocusTask])
