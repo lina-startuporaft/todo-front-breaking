@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import styles from '../style/App.module.css'
 import ToDo from '../image/to-do.jpg'
 import Sort from '../image/sort.jpg'
+import 'antd/dist/antd.css'
+import { Button } from 'antd';
 
 function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     const [count, setCount] = useState('');
@@ -19,7 +21,7 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     }
 
     let activeFilter = [];
-    const activeColor = {backgroundColor: '#6ccf71'};
+    const activeColor = {backgroundColor: '#a7d8a5'};
     switch (filterBy) {
         case ('all'):
             activeFilter[0] = activeColor;
@@ -54,13 +56,13 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
                         <input className={styles.colSpan1} maxLength="70" type="text" onChange={editChange} onKeyUp={chekEnter}/>
                     </div>
                     <div className={styles.row}>
-                        <input  className={styles.col} style={activeFilter[0]} type="button" value="all" onClick={currentFilter}/>
-                        <input  className={styles.col} style={activeFilter[1]} type="button" value="done" onClick={currentFilter}/>
-                        <input className={styles.col} style={activeFilter[2]} type="button" value="undone" onClick={currentFilter}/>
+                        <Button  className={styles.col} style={activeFilter[0]} type="button" value="all" onClick={currentFilter}>All</Button>
+                        <Button  className={styles.col} style={activeFilter[1]} type="button" value="done" onClick={currentFilter}>Done</Button>
+                        <Button className={styles.col} style={activeFilter[2]} type="button" value="undone" onClick={currentFilter}>Undone</Button>
                         <div className={styles.col}></div>
                         <img src={Sort} alt="Sort" className={styles.colSpan2}/>
-                        <input className={styles.colSpan5}  style={activeSort[0]} type="button" value="desc" onClick={sort}/>
-                        <input className={styles.colSpan5}  style={activeSort[1]} type="button" value="asc" onClick={sort}/>
+                        <Button className={styles.colSpan5}  style={activeSort[0]} type="button" value="desc" onClick={sort}>Desc</Button>
+                        <Button className={styles.colSpan5}  style={activeSort[1]} type="button" value="asc" onClick={sort}>Asc</Button>
                     </div>
                 </div>
             </div>
