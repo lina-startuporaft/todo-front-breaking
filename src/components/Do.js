@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 import 'antd/dist/antd.css'
-import { Checkbox } from 'antd';
+import { Checkbox, Button } from 'antd';
 
 
 
@@ -61,12 +61,14 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
                 </input>
             }
             <p className={styles.coldoCol3}>{task.date.slice(0, 10)}</p>
-            <input 
+            <Button
+                danger
                 className={styles.coldoCol4} 
-                type="button" 
                 value='del' 
                 onClick={delDo}
-                id={task.id}/>
+                id={task.id}>
+                    Del
+            </Button>
         </div>
     )
 }

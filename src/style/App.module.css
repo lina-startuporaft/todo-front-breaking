@@ -136,7 +136,7 @@ p{
     background: transparent;
     height: 5vh;
     border: none;
-    width: 66%;
+    width: 64%;
     margin: auto 0 auto 2%;
     min-height: 20px;
     max-height: 50px;
@@ -152,13 +152,13 @@ p{
 }
 
 .coldoCol4{
-    width: 6%;
+    width: 8%;
     background-color: #e03838;
     margin: auto 0 auto 2%;
-    font-size: 100%;
+    font-size: 80%;
     min-height: 10px;
     max-height: 50px;
-    font-size: 120%;
+    padding: 0;
 }   
 
 .mybody{
