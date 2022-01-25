@@ -3,18 +3,20 @@ import Head from './components/Head.js'
 import DoList from './DoList.js'
 import styles from './style/App.module.css'
 import Paging from './components/Paging.js'
+import { Pagination } from 'antd';
+import 'antd/dist/antd.css'
 const axios = require('axios');
 
 
 function App() {
   
   const [tasks, setTasks] = useState([]);
-  const [numberTasks, setNumberTasks] = useState();
+  const [numberPage, setNumberPage] = useState();
   const [orderBy, setOrderBy] = useState('desc');
   const [filterBy, setFilterBy] = useState('all');
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
+  useEffect(async () => {
     upgradeTasks(orderBy, filterBy, page);
   }, [orderBy, filterBy, page]);
   
@@ -31,7 +33,7 @@ function App() {
     let newArr = resultReq.data.tasks.map((task) => {
       return {title: task.name, id: task.uuid , checked: task.done, date: task.createdAt}
     });
-    setNumberTasks(resultReq.data.count);
+    setNumberPage(Math.ceil(resultReq.data.count / 5));
     setTasks(newArr);
     } catch (err) {
       alert(err);
@@ -56,19 +58,19 @@ function App() {
     try {
       const resultReq = await axios.delete('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id);
       upgradeTasks(orderBy, filterBy, page);
-      if ((((numberTasks - 1) / 5) == (page - 1)) && (page != 1)) {
-        setPage(page - 1);
+      if ((numberPage === page) && (tasks.length == 1) && (page != 1)) {
+        setPage(numberPage - 1);
       }
     } catch(err) {
       alert(err);
     }
   }
 
-  const checkboxChangeEdit = async (e, name) => {
+  const checkboxChangeEdit = async (e, id) => {
     try {
-      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id, {
-        "name": name,
-        "done": e.currentTarget.checked,
+      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.target.name, {
+        "name": id,
+        "done": e.target.checked,
       });
       upgradeTasks(orderBy, filterBy, page);
     } catch(err) {
@@ -97,17 +99,8 @@ function App() {
     setPage(1);
   }
 
-  const checkPage = (e) => {
-    switch (e.currentTarget.value) {
-      case ('<'):
-        setPage(1);
-        break;
-      case ('>'):
-        setPage(Math.ceil(numberTasks / 5));
-        break;
-      default:
-        setPage(e.currentTarget.value);
-    }
+  const checkPage = (current) => {
+        setPage(current);
   }
 
   return (
@@ -125,12 +118,15 @@ function App() {
                 delDo={delDo}
                 checkboxChangeEdit={checkboxChangeEdit}
                 editTask={editTask}/>
-                {(numberTasks > 5) ?
-                  <Paging 
-                  checkPage={checkPage}
-                  page={page}
-                  numberTasks={numberTasks}/> :
-                  null
+                {(numberPage > 1) ?
+                  <Pagination 
+                  defaultCurrent={1}
+                  current={page}
+                  total={numberPage*10}
+                  onChange={checkPage}
+                  showSizeChanger={false}
+                  className={styles.pagingconteiner}/>
+                  : null
                 }
                   
             </div>

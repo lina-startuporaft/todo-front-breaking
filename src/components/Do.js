@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
+import 'antd/dist/antd.css'
+import { Checkbox } from 'antd';
+
+
 
 function Do({task, delDo, checkboxChangeEdit, editTask}) {
 
@@ -33,12 +37,11 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
 
     return(
         <div className={styles.do}>
-            <input 
-                type="checkbox" 
-                className={styles.coldoCol1} 
+            <Checkbox
+                className={styles.coldoCol1}
                 onChange={checkboxChange}
-                id={task.id}
-                checked={task.checked}/>
+                name={task.id}
+                defaultChecked={task.checked}/>
             {
             checkFocusTask?
                 <p 
