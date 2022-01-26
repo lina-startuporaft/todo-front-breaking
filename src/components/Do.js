@@ -5,7 +5,7 @@ import { Checkbox, Button, Row, Col, Input } from 'antd';
 
 
 
-function Do({task, delDo, checkboxChangeEdit, editTaskGlobal}) {
+function Do({task, delDo, editTaskGlobal}) {
 
     const [count, setCount] = useState(task.title)
     const [currentFocus, setCurretFocus] = useState(false)
@@ -18,7 +18,7 @@ function Do({task, delDo, checkboxChangeEdit, editTaskGlobal}) {
         setCurretFocus(true);
     }
 
-    function unFocusTask() {
+    const unFocusTask = () => {
         setCurretFocus(false);
         setCount(task.title);
     }
@@ -27,20 +27,20 @@ function Do({task, delDo, checkboxChangeEdit, editTaskGlobal}) {
         setCount(e.target.value);
     }
 
-    function chekEnterOrEsc(e) {
+    const chekEnterOrEsc = (e) => {
         if (e.key == 'Escape') {
             setCount(task.title);
             e.target.blur();
         } else if (e.key == 'Enter') {
             setCount(e.target.value);
-            editTaskGlobal(e.target.value, e.target.id);
+            editTaskGlobal(e.target.value, e.target.id, task.checked);
             setCurretFocus(false);
             e.target.blur();
         }
     }
 
     const checkboxChange = (e) => {
-        checkboxChangeEdit(e, task.title)
+        editTaskGlobal(count, task.id, e.target.checked)
     }
 
     return(
