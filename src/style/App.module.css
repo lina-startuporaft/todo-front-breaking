@@ -89,13 +89,20 @@ p{
     height: 100px;
 }
 
-.colcoldo{
+.colcoldocheck{
+    position: relative;
+    transform: translate(0, -50%);
+    top: 60%;
+    width: 80%;
+    height: 50%;
+}
+
+.colcoldodel{
     position: relative;
     transform: translate(0, -50%);
     top: 50%;
     width: 80%;
-    height: 40%;
-    margin: 0 20%;
+    height: 50%;
 }
 
 .colcoldodate{

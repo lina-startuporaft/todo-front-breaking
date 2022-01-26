@@ -45,9 +45,11 @@ function Do({task, delDo, editTaskGlobal}) {
 
     return(
         <Row className={styles.do}>
-            <Col span={3}>
+            <Col span={1}>
+            </Col>
+            <Col span={2}>
                 <Checkbox
-                    className={styles.colcoldo}
+                    className={styles.colcoldocheck}
                     onChange={checkboxChange}
                     name={task.id}
                     defaultChecked={task.checked}/>
@@ -71,7 +73,7 @@ function Do({task, delDo, editTaskGlobal}) {
             <Col span={3}>
                 <Button
                     danger
-                    className={styles.colcoldo}
+                    className={styles.colcoldodel}
                     value='del' 
                     onClick={delDo}
                     id={task.id}>
