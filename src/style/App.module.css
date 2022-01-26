@@ -108,6 +108,7 @@ p{
 }
 
 .colcoldotask{
+    text-align: left;
     font-size: 120%;
     position: relative;
     transform: translate(0, -50%);

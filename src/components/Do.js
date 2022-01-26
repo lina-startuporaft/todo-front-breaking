@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 import 'antd/dist/antd.css'
-import { Checkbox, Button, Row, Col } from 'antd';
+import { Checkbox, Button, Row, Col, Input } from 'antd';
 
 
 
@@ -52,16 +52,16 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
                         onMouseDown={focusTask}>
                             {task.title}
                     </p>:
-                    <input 
+                    <Input 
                         ref={refInput} 
                         onBlur={unFocusTask} 
                         onKeyUp={chekEnterOrEsc} 
-                        className={styles.colcoldotask} 
-                        defaultValue={task.title} 
+                        className={styles.colcoldotask}
+                        defaultValue={task.title}
                         id={task.id}
                         maxLength="70">
                         
-                    </input>
+                    </Input>
                 }
             </Col>
             <Col span={3}>
