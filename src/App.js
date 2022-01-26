@@ -79,10 +79,10 @@ function App() {
     }
   }
 
-  const editTask = async (e) => {
+  const editTaskGlobal = async (name, id) => {
     try {
-      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id, {
-      "name": e.currentTarget.value,
+      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + id, {
+      "name": name,
       "updatedAt": new Date(),
     });
     upgradeTasks(orderBy, filterBy, page);
@@ -118,7 +118,7 @@ function App() {
                   tasks={tasks}
                   delDo={delDo}
                   checkboxChangeEdit={checkboxChangeEdit}
-                  editTask={editTask}/>
+                  editTaskGlobal={editTaskGlobal}/>
                     <Pagination 
                     defaultCurrent={1}
                     current={page}

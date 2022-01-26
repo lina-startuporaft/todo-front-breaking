@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Do from './components/Do.js'
 
-function DoList({tasks, delDo, checkboxChangeEdit, editTask}) {
+function DoList({tasks, delDo, checkboxChangeEdit, editTaskGlobal}) {
     return (
         <div>
             {tasks.map((task) => {
@@ -10,7 +10,7 @@ function DoList({tasks, delDo, checkboxChangeEdit, editTask}) {
                     task={task} 
                     delDo={delDo}
                     checkboxChangeEdit={checkboxChangeEdit}
-                    editTask={editTask}
+                    editTaskGlobal={editTaskGlobal}
                     key={task.id}/>
                 )
             })}

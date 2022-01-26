@@ -5,35 +5,43 @@ import { Checkbox, Button, Row, Col, Input } from 'antd';
 
 
 
-function Do({task, delDo, checkboxChangeEdit, editTask}) {
+function Do({task, delDo, checkboxChangeEdit, editTaskGlobal}) {
 
-    const [checkFocusTask, setCheckFocusTask] = useState(true)
-    const refInput = React.createRef();
+    const [count, setCount] = useState(task.title)
+    const [currentFocus, setCurretFocus] = useState(false)
 
-    function focusTask(e) {
-        if (e.button == 0){
-            setCheckFocusTask(false);
-        }
+    useEffect(() => {
+        setCount(task.title);
+    }, [currentFocus]);
+
+    const focusTask = () => {
+        setCurretFocus(true);
     }
 
     function unFocusTask() {
-        setCheckFocusTask(true);
+        setCurretFocus(false);
+        setCount(task.title);
+    }
+
+    const editTask = (e) => {
+        setCount(e.target.value);
     }
 
     function chekEnterOrEsc(e) {
         if (e.key == 'Escape') {
-            unFocusTask();
+            setCount(task.title);
+            e.target.blur();
         } else if (e.key == 'Enter') {
-            editTask(e);
-            unFocusTask();
+            setCount(e.target.value);
+            editTaskGlobal(e.target.value, e.target.id);
+            setCurretFocus(false);
+            e.target.blur()
         }
     }
 
     const checkboxChange = (e) => {
         checkboxChangeEdit(e, task.title)
     }
-
-    useEffect(() => {if (checkFocusTask == false) {refInput.current.focus()}},[checkFocusTask])
 
     return(
         <Row className={styles.do}>
@@ -45,24 +53,16 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
                     defaultChecked={task.checked}/>
             </Col>
             <Col span={15}>
-                {
-                checkFocusTask?
-                    <p 
-                        className={styles.colcoldotask} 
-                        onMouseDown={focusTask}>
-                            {task.title}
-                    </p>:
-                    <Input 
-                        ref={refInput} 
-                        onBlur={unFocusTask} 
+                    <Input
+                        onFocus={focusTask}
+                        onBlur={unFocusTask}
                         onKeyUp={chekEnterOrEsc} 
                         className={styles.colcoldotask}
-                        defaultValue={task.title}
                         id={task.id}
-                        maxLength="70">
-                        
+                        maxLength="70"
+                        value={currentFocus ? count : task.title}
+                        onChange={editTask}>
                     </Input>
-                }
             </Col>
             <Col span={3}>
                 <p className={styles.colcoldodate}>{task.date.slice(0, 10)}</p>
