@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 import { Checkbox, Button, Row, Col, Input } from 'antd';
 
 
@@ -35,7 +35,7 @@ function Do({task, delDo, checkboxChangeEdit, editTaskGlobal}) {
             setCount(e.target.value);
             editTaskGlobal(e.target.value, e.target.id);
             setCurretFocus(false);
-            e.target.blur()
+            e.target.blur();
         }
     }
 
@@ -57,7 +57,8 @@ function Do({task, delDo, checkboxChangeEdit, editTaskGlobal}) {
                         onFocus={focusTask}
                         onBlur={unFocusTask}
                         onKeyUp={chekEnterOrEsc} 
-                        className={styles.colcoldotask}
+                        className={styles.coldotask}
+                        style={{border: "none"}}
                         id={task.id}
                         maxLength="70"
                         value={currentFocus ? count : task.title}
