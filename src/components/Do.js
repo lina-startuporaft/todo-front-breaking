@@ -39,7 +39,7 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
         <Row className={styles.do}>
             <Col span={3}>
                 <Checkbox
-                    className={styles.colcol}
+                    className={styles.colcoldo}
                     onChange={checkboxChange}
                     name={task.id}
                     defaultChecked={task.checked}/>
@@ -48,7 +48,7 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
                 {
                 checkFocusTask?
                     <p 
-                        className={styles.colcol} 
+                        className={styles.colcoldotask} 
                         onMouseDown={focusTask}>
                             {task.title}
                     </p>:
@@ -56,7 +56,7 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
                         ref={refInput} 
                         onBlur={unFocusTask} 
                         onKeyUp={chekEnterOrEsc} 
-                        className={styles.colcol} 
+                        className={styles.colcoldotask} 
                         defaultValue={task.title} 
                         id={task.id}
                         maxLength="70">
@@ -65,12 +65,12 @@ function Do({task, delDo, checkboxChangeEdit, editTask}) {
                 }
             </Col>
             <Col span={3}>
-                <p className={styles.colcol}>{task.date.slice(0, 10)}</p>
+                <p className={styles.colcoldodate}>{task.date.slice(0, 10)}</p>
             </Col>
             <Col span={3}>
                 <Button
                     danger
-                    className={styles.colcol}
+                    className={styles.colcoldo}
                     value='del' 
                     onClick={delDo}
                     id={task.id}>

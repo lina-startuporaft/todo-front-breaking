@@ -119,16 +119,14 @@ function App() {
                   delDo={delDo}
                   checkboxChangeEdit={checkboxChangeEdit}
                   editTask={editTask}/>
-                  {(numberPage > 1) ?
                     <Pagination 
                     defaultCurrent={1}
                     current={page}
                     total={numberPage*10}
                     onChange={checkPage}
                     showSizeChanger={false}
-                    className={styles.pagingconteiner}/>
-                    : null
-                  }      
+                    className={styles.pagingconteiner}
+                    hideOnSinglePage={true}/>  
               </div>
           </div>
         )
