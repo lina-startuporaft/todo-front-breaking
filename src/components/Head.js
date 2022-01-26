@@ -5,19 +5,19 @@ import 'antd/dist/antd.css'
 import { Button, Input, Row, Col, message } from 'antd';
 
 function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
-    const [count, setCount] = useState('');
+    const [nameTask, setnameTask] = useState('');
 
     function editChange(e) {
-        setCount(e.target.value);
+        setnameTask(e.target.value);
     }
 
     function chekEnter(e) {
         if (e.key == 'Enter') {
-            if (count === '') {
+            if (nameTask === '') {
                 message.error('task must not be empty')
             } else {
-            addDo({count});
-            setCount('');
+            addDo({nameTask});
+            setnameTask('');
             }
         }
     }
@@ -62,7 +62,7 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Input className={styles.colcolinput} maxLength="70" type="text" value={count} onChange={editChange} onKeyUp={chekEnter} placeholder="I will..."/>
+                            <Input className={styles.colcolinput} maxLength="70" type="text" value={nameTask} onChange={editChange} onKeyUp={chekEnter} placeholder="I will..."/>
                         </Col>
                     </Row>
                     <Row>

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
 // import 'antd/dist/antd.css'
-import { Checkbox, Button, Row, Col, Input } from 'antd';
+import { Checkbox, Button, Row, Col, Input, message } from 'antd';
 
 
 
 function Do({task, delDo, editTaskGlobal}) {
 
-    const [count, setCount] = useState(task.title)
+    const [titleTask, setTitleTask] = useState(task.title)
     const [currentFocus, setCurretFocus] = useState(false)
-
-    useEffect(() => {
-        setCount(task.title);
-    }, [currentFocus]);
 
     const focusTask = () => {
         setCurretFocus(true);
@@ -20,34 +16,38 @@ function Do({task, delDo, editTaskGlobal}) {
 
     const unFocusTask = () => {
         setCurretFocus(false);
-        setCount(task.title);
     }
 
-    const editTask = (e) => {
-        setCount(e.target.value);
-    }
-
-    const chekEnterOrEsc = (e) => {
+    const chekEnterOrEsc = async (e) => {
         if (e.key === 'Escape') {
-            setCount(task.title);
-            e.target.blur();
+           unFocusTask();
         } else if (e.key === 'Enter') {
-            setCount(e.target.value);
-            editTaskGlobal(e.target.value, e.target.id, task.checked);
-            setCurretFocus(false);
-            e.target.blur();
+            if (e.target.value === '') {
+                message.error('task must not be empty')
+            } else {
+                try {
+                    await editTaskGlobal(e.target.value, e.target.id, task.checked);
+                    setTitleTask(e.target.value);
+                    e.target.blur();
+                } catch(err) {
+                    if (err.message == 'Request failed with status code 400') {
+                        message.error('there is already a task');
+                    } else {
+                        message.error(`${err.name}:${err.message}`);
+                    }
+                }
+            }
         }
     }
 
     const checkboxChange = (e) => {
-        editTaskGlobal(count, task.id, e.target.checked)
+        editTaskGlobal(task.title, task.id, e.target.checked)
     }   
 
     const delDoTask = (e) => {
         e.currentTarget.disabled = 'true';
         delDo(e);
     }
-
 
     return(
         <Row className={styles.do}>
@@ -61,17 +61,23 @@ function Do({task, delDo, editTaskGlobal}) {
                     defaultChecked={task.checked}/>
             </Col>
             <Col span={15}>
-                    <Input
-                        onFocus={focusTask}
-                        onBlur={unFocusTask}
-                        onKeyUp={chekEnterOrEsc} 
-                        className={styles.coldotask}
-                        style={{border: "none"}}
-                        id={task.id}
-                        maxLength="70"
-                        value={currentFocus ? count : task.title}
-                        onChange={editTask}>
-                    </Input>
+                    {
+                        currentFocus ?
+                            <Input
+                                defaultValue={titleTask}
+                                className={styles.coldotask}
+                                onBlur={unFocusTask}
+                                onKeyUp={chekEnterOrEsc}
+                                id={task.id}
+                                autoFocus>
+                            </Input> 
+                        :
+                            <p
+                                className={styles.coldotask} 
+                                onClick={focusTask}>
+                                    {titleTask}
+                            </p>
+                    }
             </Col>
             <Col span={3}>
                 <p className={styles.colcoldodate}>{task.date.slice(0, 10)}</p>

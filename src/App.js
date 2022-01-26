@@ -40,10 +40,10 @@ function App() {
     }
   }
 
-  const addDo = async ({count}) => {
+  const addDo = async ({nameTask}) => {
     try {
       const resultReq = await axios.post('https://todo-api-learning.herokuapp.com/v1/task/2', {
-        "name": count,
+        "name": nameTask,
         "done": false,
         "createdAt": new Date(),
         "updatedAt": new Date()
@@ -70,30 +70,13 @@ function App() {
     }
   }
 
-  // const checkboxChangeEdit = async (e, id) => {
-  //   try {
-  //     const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.target.name, {
-  //       "name": id,
-  //       "done": e.target.checked,
-  //     });
-  //     upgradeTasks(orderBy, filterBy, page);
-  //   } catch(err) {
-  //     message.error(`${err.name}:${err.message}`);
-  //   }
-  // }
-
   const editTaskGlobal = async (name, id, checked) => {
-    try {
       const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + id, {
       "name": name,
       "done": checked,
       "updatedAt": new Date(),
     });
     upgradeTasks(orderBy, filterBy, page);
-    console.log('aga')
-    } catch(err) {
-      message.error(`${err.name}:${err.message}`);
-    }
   }
 
   const sort = (e) => {
