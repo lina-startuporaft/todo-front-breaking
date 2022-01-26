@@ -71,11 +71,11 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
                         <Col span={4}>
                             <Button className={styles.colcol} style={activeFilter[2]} type="button" value="undone" onClick={currentFilter}>Undone</Button>
                         </Col>
-                        <Col span={5}>
+                        <Col span={4}>
                             <div className={styles.colcol}></div>
                         </Col>
-                        <Col span={1}>
-                            <div className={styles.colcol}>Sort</div>
+                        <Col span={2}>
+                            <div className={styles.colcolsort}>Sort:</div>
                         </Col>
                         <Col span={3}>
                             <Button  className={styles.colcol} style={activeSort[0]} type="button" value="desc" onClick={sort}>Desc</Button>

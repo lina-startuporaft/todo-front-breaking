@@ -6,9 +6,9 @@
     width: 42.349%;
     margin: 10px auto 0 auto;
     max-width: 980px;
-    max-height: 220px;
+    max-height: 230px;
     min-width: 700px;
-    min-height: 220px;
+    min-height: 230px;
 }
   
 .head {
@@ -78,6 +78,14 @@ p{
 
 .colcol{
     width: 100%;
+    margin: 10px auto;
+}
+
+.colcolsort{
+    width: 100%;
+    margin: 10px auto;
+    font-size: 140%;
+    text-align: left;
 }
 
 .colcolinput{
