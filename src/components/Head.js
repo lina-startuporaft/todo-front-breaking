@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from '../style/App.module.css'
 import ToDo from '../image/to-do.jpg'
 import 'antd/dist/antd.css'
-import { Button, Input, Row, Col } from 'antd';
+import { Button, Input, Row, Col, message } from 'antd';
 
 function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
     const [count, setCount] = useState('');
@@ -13,8 +13,12 @@ function Head({addDo, sort , currentFilter, filterBy, orderBy}) {
 
     function chekEnter(e) {
         if (e.key == 'Enter') {
+            if (count === '') {
+                message.error('task must not be empty')
+            } else {
             addDo({count});
             setCount('');
+            }
         }
     }
 

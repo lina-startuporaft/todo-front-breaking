@@ -28,10 +28,10 @@ function Do({task, delDo, editTaskGlobal}) {
     }
 
     const chekEnterOrEsc = (e) => {
-        if (e.key == 'Escape') {
+        if (e.key === 'Escape') {
             setCount(task.title);
             e.target.blur();
-        } else if (e.key == 'Enter') {
+        } else if (e.key === 'Enter') {
             setCount(e.target.value);
             editTaskGlobal(e.target.value, e.target.id, task.checked);
             setCurretFocus(false);
@@ -41,7 +41,13 @@ function Do({task, delDo, editTaskGlobal}) {
 
     const checkboxChange = (e) => {
         editTaskGlobal(count, task.id, e.target.checked)
+    }   
+
+    const delDoTask = (e) => {
+        e.currentTarget.disabled = 'true';
+        delDo(e);
     }
+
 
     return(
         <Row className={styles.do}>
@@ -75,7 +81,7 @@ function Do({task, delDo, editTaskGlobal}) {
                     danger
                     className={styles.colcoldodel}
                     value='del' 
-                    onClick={delDo}
+                    onClick={delDoTask}
                     id={task.id}>
                         Del
                 </Button>

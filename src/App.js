@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Head from './components/Head.js'
 import DoList from './DoList.js'
 import styles from './style/App.module.css'
-import Paging from './components/Paging.js'
 import { Pagination } from 'antd';
 import 'antd/dist/antd.css'
 import { message } from 'antd';
@@ -51,7 +50,11 @@ function App() {
       });
       upgradeTasks(orderBy, filterBy, page);
     } catch (err) {
-      message.error(`${err.name}:${err.message}`);
+      if (err.message == 'Request failed with status code 400') {
+        message.error('there is already a task');
+      } else {
+        message.error(`${err.name}:${err.message}`);
+      }
     }
   }
 
@@ -121,13 +124,13 @@ function App() {
                   delDo={delDo}
                   editTaskGlobal={editTaskGlobal}/>
                     <Pagination 
-                    defaultCurrent={1}
-                    current={page}
-                    total={numberPage*10}
-                    onChange={checkPage}
-                    showSizeChanger={false}
-                    className={styles.pagingconteiner}
-                    hideOnSinglePage={true}/>  
+                      defaultCurrent={1}
+                      current={page}
+                      total={numberPage*10}
+                      onChange={checkPage}
+                      showSizeChanger={false}
+                      className={styles.pagingconteiner}
+                      hideOnSinglePage={true}/>  
               </div>
           </div>
         )
