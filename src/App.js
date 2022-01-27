@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react'
 import Head from './components/Head.js'
 import DoList from './DoList.js'
 import styles from './style/App.module.css'
-import { Pagination } from 'antd';
+import { Pagination, message } from 'antd';
 import 'antd/dist/antd.css'
-import { message } from 'antd';
 const axios = require('axios');
 
 

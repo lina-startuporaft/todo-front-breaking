@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styles from "../style/App.module.css"
-// import 'antd/dist/antd.css'
+import 'antd/dist/antd.css'
 import { Checkbox, Button, Row, Col, Input, message } from 'antd';
+import { CSSTransition } from 'react-transition-group'
+import '../style/Animation.css'
 
 
 
 function Do({task, delDo, editTaskGlobal}) {
 
+    const [animation, setAnimation] = useState(false);
     const [titleTask, setTitleTask] = useState(task.title)
     const [currentFocus, setCurretFocus] = useState(false)
+
+    useEffect(() => {
+        setAnimation(!animation);
+    }, [])
 
     const focusTask = () => {
         setCurretFocus(true);
@@ -50,6 +57,7 @@ function Do({task, delDo, editTaskGlobal}) {
     }
 
     return(
+        <CSSTransition in={animation} classNames="animation" timeout={300}>
         <Row className={styles.do}>
             <Col span={1}>
             </Col>
@@ -93,6 +101,7 @@ function Do({task, delDo, editTaskGlobal}) {
                 </Button>
             </Col>
         </Row>
+        </CSSTransition>
     )
 }
 
