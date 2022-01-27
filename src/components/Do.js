@@ -56,8 +56,8 @@ function Do({task, delDo, editTaskGlobal}) {
 
     const delDoTask = (e) => {
         e.currentTarget.disabled = 'true';
-        delDo(e);
         setAnimation(!animation);
+        delDo(e);
     }
 
     return(
