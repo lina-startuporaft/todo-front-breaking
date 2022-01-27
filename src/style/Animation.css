@@ -4,7 +4,24 @@
 
 .animation-enter-active{
     opacity: 1;
-    transition: opacity 500ms;
+    transition: opacity 200ms;
 }
 
+.animation-exit {
+    opacity: 1;
+}
+
+.animation-exit-active{
+    opacity: 0;
+    transition: opacity 300ms;
+}
+
+.animationEdit-enter {
+    opacity: 0;
+}
+
+.animationEdit-enter-active{
+    opacity: 1;
+    transition: opacity 200ms;
+}
 
