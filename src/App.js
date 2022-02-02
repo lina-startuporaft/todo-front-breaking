@@ -10,27 +10,27 @@ const axios = require('axios');
 function App() {
   
   const [tasks, setTasks] = useState([]);
-  const [numberPage, setNumberPage] = useState();
+  const [numberPage, setNumberPage] = useState(1);
   const [orderBy, setOrderBy] = useState('desc');
   const [filterBy, setFilterBy] = useState('all');
   const [page, setPage] = useState(1);
 
-  useEffect(async () => {
+  useEffect(() => {
     upgradeTasks(orderBy, filterBy, page);
   }, [orderBy, filterBy, page]);
   
   const upgradeTasks = async (orderBy, filterBy, page) => {
     try {
-      const resultReq  = await axios.get('https://todo-api-learning.herokuapp.com/v1/tasks/2', {
+      const resultReq  = await axios.get('http://localhost:4000/api/tasks/',{
       params: {
-        filterBy: (filterBy === 'all') ? null : filterBy,
+        filterBy: filterBy,
         order: orderBy,
-        pp: "5",
+        pp: 5,
         page: page,
       }
     });
     let newArr = resultReq.data.tasks.map((task) => {
-      return {title: task.name, id: task.uuid , checked: task.done, date: task.createdAt}
+      return {title: task.name, id: task.id , checked: task.done, date: task.createdAt}
     });
     setNumberPage(Math.ceil(resultReq.data.count / 5));
     setTasks(newArr);
@@ -41,11 +41,10 @@ function App() {
 
   const addDo = async ({nameTask}) => {
     try {
-      const resultReq = await axios.post('https://todo-api-learning.herokuapp.com/v1/task/2', {
+      const resultReq = await axios.post('http://localhost:4000/api/tasks', {
         "name": nameTask,
         "done": false,
         "createdAt": new Date(),
-        "updatedAt": new Date()
       });
       upgradeTasks(orderBy, filterBy, page);
     } catch (err) {
@@ -59,7 +58,11 @@ function App() {
 
   const delDo = async (e) => {
     try {
-      const resultReq = await axios.delete('https://todo-api-learning.herokuapp.com/v1/task/2/' + e.currentTarget.id);
+      const resultReq = await axios.delete('http://localhost:4000/api/tasks', {
+        params: {
+          id: e.currentTarget.id,
+        }
+      });
       upgradeTasks(orderBy, filterBy, page);
       if ((numberPage === page) && (tasks.length == 1) && (page != 1)) {
         setPage(numberPage - 1);
@@ -70,10 +73,10 @@ function App() {
   }
 
   const editTaskGlobal = async (name, id, checked) => {
-      const resultReq = await axios.patch('https://todo-api-learning.herokuapp.com/v1/task/2/' + id, {
+      const resultReq = await axios.patch('http://localhost:4000/api/tasks', {
       "name": name,
       "done": checked,
-      "updatedAt": new Date(),
+      "id": id,
     });
     upgradeTasks(orderBy, filterBy, page);
   }

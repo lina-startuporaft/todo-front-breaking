@@ -40,7 +40,7 @@ function Do({task, delDo, editTaskGlobal}) {
                     e.target.blur();
                     setAnimationEdit(true);
                 } catch(err) {
-                    if (err.message == 'Request failed with status code 400') {
+                    if (err.message == 'Request failed with status code 401') {
                         message.error('there is already a task');
                     } else {
                         message.error(`${err.name}:${err.message}`);
@@ -93,7 +93,7 @@ function Do({task, delDo, editTaskGlobal}) {
                             }
                     </Col>
                     <Col span={3}>
-                        <p className={styles.colcoldodate}>{task.date.slice(0, 10)}</p>
+                        <p className={styles.colcoldodate}>{task.date}</p>
                     </Col>
                     <Col span={3}>
                         <Button
